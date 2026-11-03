@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Western Visayas Socioeconomic Indicators | Region VI</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <span class="brand-fallback">VI</span>
+        <img src="assets/image/logo.png" alt="DEPDev Region VI logo"
+             onerror="this.style.display='none'">
+      </div>
+      <div>
+        <h1>Western Visayas Socioeconomic Indicators</h1>
+        <p>Department of Economy, Planning, and Development (DEPDev) Region VI</p>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="population">Population</button>
+      <button class="tab" data-tab="grdp">GRDP</button>
+      <button class="tab" data-tab="poverty">Poverty</button>
+      <button class="tab" data-tab="inflation">Inflation</button>
+      <button class="tab sector-tab" data-tab="economic">Economic</button>
+      <button class="tab sector-tab" data-tab="social">Social</button>
+      <button class="tab sector-tab" data-tab="infrastructure">Infrastructure</button>
+      <button class="tab sector-tab" data-tab="governance">Governance</button>
+      <button class="tab sector-tab" data-tab="environment">Environment</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="tab-overview" class="section active">
+    <div class="section-head">
+      <h2>Regional Overview</h2>
+      <p class="sub">Key socioeconomic indicators for Western Visayas at a glance.</p>
+    </div>
+
+    <div class="search-wrap">
+      <input id="ov-search" class="ov-search" type="search"
+             placeholder="Search indicators — try &#34;tourist&#34;, &#34;stunting&#34;, &#34;bridge&#34;, &#34;GRDP&#34;…"
+             autocomplete="off">
+      <div class="search-results" id="ov-search-results" hidden></div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi" data-detail="population">
+        <span class="kpi-label">Population (2024 Census)</span>
+        <span class="kpi-value" id="ov-pop">–</span>
+        <span class="kpi-sub" id="ov-pop-sub"></span>
+      </div>
+      <div class="kpi" data-detail="grdp">
+        <span class="kpi-label">GRDP Growth (2024)</span>
+        <span class="kpi-value" id="ov-grdp">–</span>
+        <span class="kpi-sub" id="ov-grdp-sub"></span>
+      </div>
+      <div class="kpi" data-detail="poverty">
+        <span class="kpi-label">Poverty Incidence among Families (2023)</span>
+        <span class="kpi-value" id="ov-pov">–</span>
+        <span class="kpi-sub" id="ov-pov-sub"></span>
+      </div>
+      <div class="kpi" data-detail="inflation">
+        <span class="kpi-label">Inflation Rate (2025 annual avg.)</span>
+        <span class="kpi-value" id="ov-inf">–</span>
+        <span class="kpi-sub" id="ov-inf-sub"></span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>GRDP growth vs. Inflation</h3>
+        <div class="chart-box"><canvas id="ov-chart"></canvas></div>
+        <p class="caption">Regional GRDP growth rate (line, left axis) and inflation rate (bars, right axis), annual.</p>
+      </div>
+      <div class="card">
+        <h3>At a glance</h3>
+        <ul class="facts" id="ov-facts"></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Explore by sector</h3>
+      <div class="sector-chips" id="ov-sector-chips"></div>
+    </div>
+  </section>
+
+  <!-- ============ POPULATION ============ -->
+  <section id="tab-population" class="section">
+    <div class="section-head">
+      <h2>Population</h2>
+      <p class="sub">Population of Western Visayas based on the 2024 Census of Population (reference date: July 1, 2024).</p>
+    </div>
+
+    <div class="kpi-grid kpi-4">
+      <div class="kpi">
+        <span class="kpi-label">Total Population, 2024</span>
+        <span class="kpi-value" id="pop-total">–</span>
+        <span class="kpi-sub">as of July 1, 2024</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Annual Growth Rate, 2020–2024</span>
+        <span class="kpi-value" id="pop-pgr">–</span>
+        <span class="kpi-sub">percent, average annual</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Share of National Population</span>
+        <span class="kpi-value" id="pop-share">–</span>
+        <span class="kpi-sub" id="pop-rank"></span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Added since 2020 Census</span>
+        <span class="kpi-value" id="pop-added">–</span>
+        <span class="kpi-sub">persons in 4 years</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Population trend, censuses</h3>
+        <div class="chart-box"><canvas id="pop-trend"></canvas></div>
+        <p class="caption">2010, 2015, 2020 censuses and 2024 POPCEN (trend reflects the current post-NIR boundary for the region).</p>
+      </div>
+      <div class="card">
+        <h3>Population by province, 2024</h3>
+        <div class="chart-box"><canvas id="pop-prov"></canvas></div>
+        <p class="caption">Iloilo Province and Iloilo City are shown separately (Iloilo City is a highly urbanized city).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Population and growth rate by province/HUC</h3>
+      <div class="table-wrap"><table id="pop-table"></table></div>
+    </div>
+
+    <div class="note" id="pop-note"></div>
+  </section>
+
+  <!-- ============ GRDP ============ -->
+  <section id="tab-grdp" class="section">
+    <div class="section-head">
+      <h2>Gross Regional Domestic Product</h2>
+      <p class="sub">GRDP of Western Visayas and comparison across Philippine regions. Source: SER Data workbook (PSA).</p>
+    </div>
+
+    <div class="kpi-grid kpi-3">
+      <div class="kpi">
+        <span class="kpi-label">GRDP Growth, 2024</span>
+        <span class="kpi-value" id="grdp-g">–</span>
+        <span class="kpi-sub">year-on-year, constant prices</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Real GRDP, 2024</span>
+        <span class="kpi-value" id="grdp-l">–</span>
+        <span class="kpi-sub">PHP billion, constant 2018 prices</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Growth peak, 2022</span>
+        <span class="kpi-value" id="grdp-peak">–</span>
+        <span class="kpi-sub" id="grdp-peak-sub"></span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>GRDP growth rate of Region VI</h3>
+        <div class="chart-box"><canvas id="grdp-growth"></canvas></div>
+        <p class="caption">Annual GRDP growth rate of Western Visayas. Source: SER Data workbook (PSA).</p>
+      </div>
+      <div class="card">
+        <h3>GRDP growth across regions, 2024</h3>
+        <div class="chart-box"><canvas id="grdp-regions"></canvas></div>
+        <p class="caption">Growth rates of all regions in 2024; Western Visayas is highlighted.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Real GRDP level, Region VI</h3>
+      <div class="chart-box chart-tall"><canvas id="grdp-level"></canvas></div>
+      <p class="caption">GRDP at constant prices, as reported in the SER workbook (unit: PHP '000), converted here to PHP billion.</p>
+    </div>
+  </section>
+
+  <!-- ============ POVERTY ============ -->
+  <section id="tab-poverty" class="section">
+    <div class="section-head">
+      <h2>Poverty Statistics</h2>
+      <p class="sub">Official poverty statistics of PSA — 2023 Full Year Official Poverty Statistics.</p>
+    </div>
+
+    <div class="kpi-grid kpi-4">
+      <div class="kpi">
+        <span class="kpi-label">Poverty Incidence among Families, 2023</span>
+        <span class="kpi-value" id="pov-2023">–</span>
+        <span class="kpi-sub">about 119,000 poor families</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Change vs. 2021</span>
+        <span class="kpi-value" id="pov-chg">–</span>
+        <span class="kpi-sub">percentage points</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">vs. National, 2023</span>
+        <span class="kpi-value" id="pov-vs-nat">–</span>
+        <span class="kpi-sub">national: 10.9%</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Poverty Threshold, 2023</span>
+        <span class="kpi-value" id="pov-thresh">–</span>
+        <span class="kpi-sub">annual per capita income needed</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Poverty incidence by province</h3>
+        <div class="chart-box"><canvas id="pov-prov"></canvas></div>
+        <p class="caption">Poverty incidence among families (%), 2018, 2021 and 2023. Iloilo City became an independent estimation domain in later years.</p>
+      </div>
+      <div class="card">
+        <h3>Region VI vs. Philippines</h3>
+        <div class="chart-box"><canvas id="pov-trend"></canvas></div>
+        <p class="caption">Poverty incidence among families, region versus national. Source: PSA 2023 Full Year Official Poverty Statistics.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Poverty incidence among families by province/HUC</h3>
+      <div class="table-wrap"><table id="pov-table"></table></div>
+    </div>
+
+    <div class="note" id="pov-notes"></div>
+  </section>
+
+  <!-- ============ INFLATION ============ -->
+  <section id="tab-inflation" class="section">
+    <div class="section-head">
+      <h2>Inflation</h2>
+      <p class="sub">Inflation rate of Western Visayas — regional average, monthly movement, and by province. Source: SER workbook (PSA).</p>
+    </div>
+
+    <div class="kpi-grid kpi-3">
+      <div class="kpi">
+        <span class="kpi-label">Annual Average Inflation, 2025</span>
+        <span class="kpi-value" id="inf-annual">–</span>
+        <span class="kpi-sub" id="inf-annual-sub"></span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Latest Month (Dec 2025)</span>
+        <span class="kpi-value" id="inf-latest">–</span>
+        <span class="kpi-sub" id="inf-latest-sub"></span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Series Peak</span>
+        <span class="kpi-value" id="inf-peak">–</span>
+        <span class="kpi-sub" id="inf-peak-sub"></span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Annual average inflation, Region VI</h3>
+        <div class="chart-box"><canvas id="inf-annual-chart"></canvas></div>
+        <p class="caption">Average annual inflation rate. Source: SER Data workbook (PSA).</p>
+      </div>
+      <div class="card">
+        <h3>Monthly inflation, Jan 2022 – Dec 2025</h3>
+        <div class="chart-box"><canvas id="inf-monthly"></canvas></div>
+        <p class="caption">Monthly inflation rate (year-on-year), Region VI.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Inflation by province and city</h3>
+      <div class="year-btns" id="inf-prov-years"></div>
+      <div class="chart-box"><canvas id="inf-prov-chart"></canvas></div>
+      <p class="caption">Annual average inflation rate by province and by Iloilo City. Select a year to compare.</p>
+    </div>
+
+    <div class="card">
+      <h3>Annual inflation by province, all years</h3>
+      <div class="table-wrap"><table id="inf-table"></table></div>
+    </div>
+  </section>
+
+  <!-- Sector sections are generated dynamically by main.js -->
+  <div id="sector-sections"></div>
+
+</main>
+
+<footer class="footer">
+  <div class="container" id="footer-sources"></div>
+</footer>
+
+<script src="assets/vendor/chart.umd.min.js"></script>
+<script src="data/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
